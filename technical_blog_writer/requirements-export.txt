@@ -1,0 +1,3 @@
+# Optional: only needed for HTML/PDF export.
+markdown-it-py>=3.0,<5
+playwright>=1.49,<2

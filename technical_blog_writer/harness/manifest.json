@@ -1,0 +1,78 @@
+{
+  "$schema": "./schemas/manifest.schema.json",
+  "schema_version": 1,
+  "id": "technical-blog",
+  "name": "Evidence-grounded technical blog meta harness",
+  "host": "Interactive coding core harness with local tools and user-configured MCP connections",
+  "entrypoint": "AGENTS.md",
+  "capability_contract": "harness/contracts/host-capabilities.md",
+  "hosts": [
+    {"id": "codex", "entrypoint": "AGENTS.md", "adapter": "harness/adapters/codex.md", "activation": "native-project-instructions"},
+    {"id": "claude-code", "entrypoint": "CLAUDE.md", "adapter": "harness/adapters/claude-code.md", "activation": "native-project-instructions"},
+    {"id": "opencode", "entrypoint": "AGENTS.md", "adapter": "harness/adapters/opencode.md", "activation": "native-project-instructions"},
+    {"id": "gemini-cli", "entrypoint": "GEMINI.md", "adapter": "harness/adapters/gemini-cli.md", "activation": "native-project-instructions"},
+    {"id": "cursor", "entrypoint": ".cursor/rules/technical-blog.mdc", "adapter": "harness/adapters/cursor.md", "activation": "project-rule"},
+    {"id": "copilot", "entrypoint": ".github/copilot-instructions.md", "adapter": "harness/adapters/copilot.md", "activation": "repository-instructions"},
+    {"id": "generic", "entrypoint": "AGENTS.md", "adapter": "harness/adapters/generic.md", "activation": "explicit-prompt"}
+  ],
+  "workflow": "harness/workflows/technical-blog.md",
+  "input_schema": "harness/schemas/input.schema.json",
+  "blueprints": "harness/blueprints/article-types.json",
+  "editorial_schema": "harness/schemas/editorial.schema.json",
+  "input_sample": "input/input_sample.json",
+  "input_samples": ["input/input_sample.json", "input/sample_single.json", "input/sample_microsoft.json", "input/sample_local_tutorial.json", "input/sample_custom_sources.json"],
+  "policies": [
+    "harness/policies/input.md",
+    "harness/policies/sources.md",
+    "harness/policies/collection.md",
+    "harness/policies/mcp.md",
+    "harness/policies/editorial.md",
+    "harness/policies/quality.md"
+  ],
+  "defaults": "harness/config.collection.json",
+  "runtime": {
+    "state": "project.json",
+    "decisions": "outputs/decisions.md",
+    "outputs": "outputs/",
+    "input": "input/blog.json",
+    "input_snapshot": "outputs/input.json",
+    "collection_state": "outputs/data/collection-state.json",
+    "editorial_packet": "outputs/draft/editorial.json",
+    "quality_report": "outputs/draft/quality-report.json",
+    "commands": ["scripts/blog.py", "scripts/collection.py", "scripts/host.py", "scripts/editorial.py"],
+    "execution": "one orchestrator, one writer, no nested model or MCP server",
+    "bootstrap_command": ["scripts/blog.py", "startup"]
+  },
+  "stages": [
+    {
+      "id": "COLLECTION",
+      "guide": "harness/workflows/technical-blog.md",
+      "inputs": ["user topic/audience", "input preferences or missing-field intake", "confirmed selected sources", "navigation/load consent", "authorized source scope"],
+      "outputs": ["outputs/data/catalog.json", "outputs/data/research-brief.md", "outputs/data/claims.md", "outputs/data/search-log.md"],
+      "gate": "User accepts coverage and authorizes drafting; evidence checks pass"
+    },
+    {
+      "id": "DRAFT",
+      "guide": "harness/workflows/technical-blog.md",
+      "inputs": ["collection evidence", "input or user word count", "2 or 3 selected structures"],
+      "outputs": ["outputs/draft/version-01.md", "outputs/draft/version-02.md", "outputs/draft/comparison.md", "outputs/draft/evidence-map.md", "outputs/draft/diagram-notes.md", "outputs/draft/editorial.json", "outputs/draft/quality-report.json", "outputs/draft/quality-report.md"],
+      "gate": "User agrees to review; drafts/maps exist and new or opted-in runs have a fresh passing editorial report for all versions"
+    },
+    {
+      "id": "REVISE",
+      "guide": "harness/workflows/technical-blog.md",
+      "inputs": ["user-selected draft", "user feedback", "supporting evidence"],
+      "outputs": ["outputs/revised_draft/"],
+      "gate": "User explicitly satisfied with a specific SHA-256-pinned revision; new/opted-in runs also pin a fresh quality fingerprint. Heading remains provisional until PREPARE"
+    },
+    {
+      "id": "PREPARE",
+      "guide": "harness/stages/prepare.md",
+      "inputs": ["approved revision", "user-selected publication title suggested in PREPARE", "hero selection or explicit skip", "selected cloud destination/upload consent"],
+      "outputs": ["outputs/blog/title-options.json", "outputs/blog/article.md", "outputs/blog/article.html", "outputs/blog/article.pdf", "outputs/blog/verification.md", "outputs/blog/delivery.json"],
+      "gate": "User accepts verified real artifacts; four-format completion additionally requires verified Google Doc"
+    }
+  ],
+  "evaluations": "python3 -m unittest discover -s tests -v",
+  "git_guard": ".githooks/pre-commit"
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Simple technical-blog brief (all fields optional; no approvals or title preferences)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "integer", "const": 2},
+    "topic": {"type": "string", "minLength": 1},
+    "audience": {"type": "string", "minLength": 1},
+    "goal": {"type": "string", "minLength": 1},
+    "words": {"type": "integer", "minimum": 1},
+    "drafts": {"type": "integer", "enum": [2, 3]},
+    "depth": {"type": "string", "minLength": 1},
+    "tone": {"type": "string", "minLength": 1},
+    "publication": {"enum": ["public", "internal"]},
+    "keywords": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "cover": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "exclude": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "questions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "from_date": {"type": "string", "format": "date"},
+    "cutoff_date": {"type": "string", "format": "date"},
+    "series": {
+      "type": "object", "required": ["part", "total"], "additionalProperties": false,
+      "properties": {
+        "part": {"type": "integer", "minimum": 1},
+        "total": {"type": "integer", "minimum": 2},
+        "roadmap": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": {"type": "array", "items": {"type": "string", "minLength": 1}}
+    },
+    "files": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "manual_sources": {
+      "type": "object",
+      "additionalProperties": {"type": "array", "items": {"type": "string", "minLength": 1}}
+    },
+    "scope": {"type": "string"},
+    "source_scopes": {"type": "object", "additionalProperties": {"type": "string"}},
+    "source_settings": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "properties": {
+          "backend": {"type": "string", "minLength": 1},
+          "scope_prefixes": {"type": "array", "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    },
+    "follow": {"enum": ["none", "children", "links", "both"]},
+    "max_depth": {"type": "integer", "minimum": 0},
+    "limits": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "max_items_per_source": {"type": "integer", "minimum": 1},
+        "max_items_total": {"type": "integer", "minimum": 1},
+        "max_links_per_item": {"type": "integer", "minimum": 1},
+        "max_requests_per_backend": {"type": "integer", "minimum": 1},
+        "max_requests_total": {"type": "integer", "minimum": 1},
+        "max_elapsed_seconds": {"type": "integer", "minimum": 1},
+        "min_interval_seconds": {"type": "integer", "minimum": 1},
+        "max_retries": {"type": "integer", "minimum": 0},
+        "branch_low_value_limit": {"type": "integer", "minimum": 1},
+        "global_low_value_limit": {"type": "integer", "minimum": 1}
+      }
+    },
+    "store_confidential_locally": {"type": "boolean"},
+    "outputs": {"type": "array", "minItems": 1, "items": {"enum": ["markdown", "html", "pdf", "google_doc"]}},
+    "cloud_destinations": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "count_scope": {"type": "string", "minLength": 1},
+    "notes": {"type": "string"}
+  }
+}

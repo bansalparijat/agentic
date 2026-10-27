@@ -1,0 +1,18 @@
+{
+  "topic": "Migrating a reporting pipeline without downtime",
+  "audience": "Data engineers and software architects",
+  "words": 1800,
+  "depth": "Architecture-deep",
+  "publication": "internal",
+  "cover": ["Old and new architecture", "Migration phases", "Validation and rollback", "Measured results"],
+  "sources": {
+    "SharePoint": ["https://example.sharepoint.com/sites/Engineering/Shared%20Documents/ReportingMigration.docx"],
+    "Microsoft Teams": ["https://teams.microsoft.com/l/channel/REPLACE_WITH_CHANNEL_ID/Reporting"],
+    "Azure DevOps": ["https://dev.azure.com/example/Reporting/_workitems/edit/123"]
+  },
+  "scope": "Reporting project files, migration work items, and relevant threads in the selected Teams channel only.",
+  "cutoff_date": "2026-01-31",
+  "follow": "links",
+  "max_depth": 1,
+  "store_confidential_locally": true
+}

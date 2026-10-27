@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Reject any outputs/ content in the Git index, including force-added files."""
+from pathlib import PurePosixPath
+import subprocess
+import sys
+
+
+def main():
+    result = subprocess.run(["git", "ls-files", "--cached", "--full-name", "-z"], capture_output=True)
+    if result.returncode:
+        print("Cannot inspect Git index; refusing commit.", file=sys.stderr)
+        return 1
+    blocked = [name for name in result.stdout.split(b"\0")
+               if name and "outputs" in PurePosixPath(name.decode("utf-8", errors="surrogateescape")).parts[:-1]]
+    if blocked:
+        # Do not print potentially sensitive artifact names or contents.
+        print(f"Commit blocked: {len(blocked)} file(s) under outputs/ are tracked or staged. "
+              "Remove them from the Git index only (keep local files), then retry. "
+              "Never force-add outputs or bypass this hook.", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

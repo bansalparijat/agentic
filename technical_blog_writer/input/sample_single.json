@@ -1,0 +1,15 @@
+{
+  "topic": "How we made background jobs safe to retry",
+  "audience": "Backend developers",
+  "goal": "Explain idempotency, retry policies, and failure handling through a concrete system example.",
+  "words": 1200,
+  "publication": "public",
+  "keywords": ["idempotency", "retries", "queues"],
+  "sources": {
+    "GitHub": ["https://github.com/example/job-service"],
+    "Confluence": ["https://example.atlassian.net/wiki/spaces/ENG/pages/123/Retry-design"]
+  },
+  "scope": "Only the job-service repository and the supplied design document with relevant child pages.",
+  "follow": "both",
+  "store_confidential_locally": true
+}

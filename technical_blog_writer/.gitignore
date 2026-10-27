@@ -1,0 +1,18 @@
+# Never commit generated evidence, drafts, deliverables or assets (all descendants).
+/outputs/
+# Other potentially sensitive runtime content
+/project.json
+/project.json.tmp
+/decisions.md
+# Personal intake files are private; only sanitized examples/docs are tracked.
+/input/*
+!/input/input_sample.json
+!/input/sample_single.json
+!/input/sample_microsoft.json
+!/input/sample_local_tutorial.json
+!/input/sample_custom_sources.json
+!/input/README.md
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "types": {
+    "architecture-case-study": {
+      "description": "Explain a consequential design through constraints, decisions, mechanisms and evidence.",
+      "signals": ["architecture", "system design", "distributed", "trade-off"],
+      "slots": ["problem", "constraints", "alternatives", "mechanism", "evidence", "applicability", "takeaways"]
+    },
+    "tutorial": {
+      "description": "Help the reader reproduce a bounded result safely.",
+      "signals": ["tutorial", "step-by-step", "hands-on", "getting started", "walkthrough"],
+      "slots": ["reader-outcome", "prerequisites", "walkthrough", "verification", "troubleshooting", "cost-and-cleanup", "takeaways"]
+    },
+    "performance-investigation": {
+      "description": "Explain a bottleneck, competing hypotheses, changes, measurements and limits.",
+      "signals": ["performance", "latency", "throughput", "benchmark", "optimization", "cpu", "memory"],
+      "slots": ["problem", "baseline", "hypotheses", "mechanism", "evaluation", "limitations", "takeaways"]
+    },
+    "ml-experiment": {
+      "description": "Explain an ML question with dataset/model context, evaluation and honest limitations.",
+      "signals": ["experiment", "fine-tuning", "reinforcement learning", "training", "ablation", "dataset"],
+      "slots": ["question", "data-and-model", "baselines", "method", "evaluation", "limitations-and-safety", "takeaways"]
+    },
+    "migration-journey": {
+      "description": "Explain the old/new system, rollout decisions, verification and recovery.",
+      "signals": ["migration", "migrating", "cutover", "rollout", "modernization"],
+      "slots": ["motivation", "old-and-new", "constraints", "rollout-and-rollback", "verification", "lessons", "takeaways"]
+    },
+    "technical-introduction": {
+      "description": "Explain a technical capability, its contract, applicability and adoption path without sales copy.",
+      "signals": ["introducing", "announcement", "new feature", "release", "availability"],
+      "slots": ["reader-benefit", "mechanism", "compatibility", "example", "limitations", "adoption", "takeaways"]
+    }
+  },
+  "figure_kinds": ["architecture", "sequence", "flow", "deployment", "chart", "table", "equation", "screenshot"]
+}

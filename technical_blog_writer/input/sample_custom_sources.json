@@ -1,0 +1,19 @@
+{
+  "topic": "Operating a real-time event platform",
+  "audience": "Platform engineers and SREs",
+  "words": 1500,
+  "drafts": 3,
+  "publication": "internal",
+  "keywords": ["event streaming", "backpressure", "observability"],
+  "sources": {
+    "Webex": ["https://example.webex.com/recordingservice/sites/example/recording/REPLACE_WITH_RECORDING_ID"],
+    "Our internal wiki": ["https://wiki.example.com/platform/events"],
+    "Grafana": ["https://grafana.example.com/d/events/platform-health"]
+  },
+  "manual_sources": {"Office exports": ["input/materials/capacity.xlsx", "input/materials/architecture.docx"]},
+  "scope": "The event platform project, selected meeting transcript and approved dashboard; not the entire tenant.",
+  "follow": "both",
+  "max_depth": 1,
+  "store_confidential_locally": true,
+  "notes": "Separate measured findings from meeting suggestions and validate transcript terminology."
+}

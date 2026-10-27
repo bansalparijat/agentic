@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent-authored editorial packet, not user intake or automatic approval",
+  "type": "object",
+  "required": ["schema_version", "plan", "measurements", "reproducibility", "figures", "reviews"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "plan": {
+      "type": "object", "required": ["article_type", "selection_reason", "thesis", "reader_outcomes", "coverage", "outlines"],
+      "additionalProperties": false,
+      "properties": {
+        "article_type": {"enum": ["architecture-case-study", "tutorial", "performance-investigation", "ml-experiment", "migration-journey", "technical-introduction"]},
+        "selection_reason": {"type": "string"}, "thesis": {"type": "string"},
+        "reader_outcomes": {"type": "array", "items": {"type": "string"}},
+        "coverage": {
+          "type": "array", "items": {
+            "type": "object", "required": ["requirement", "status", "sources", "sections", "note"],
+            "properties": {
+              "requirement": {"type": "string"}, "status": {"enum": ["pending", "covered", "qualified", "omitted"]},
+              "sources": {"type": "array", "items": {"type": "string"}},
+              "sections": {"type": "array", "items": {"type": "string"}}, "note": {"type": "string"}
+            }, "additionalProperties": false
+          }
+        },
+        "outlines": {
+          "type": "array", "items": {
+            "type": "object", "required": ["file", "angle", "sections"],
+            "properties": {
+              "file": {"type": "string"}, "angle": {"type": "string"},
+              "sections": {
+                "type": "array", "items": {
+                  "type": "object", "required": ["heading", "purpose", "words", "sources"],
+                  "properties": {
+                    "heading": {"type": "string"}, "purpose": {"type": "string"},
+                    "words": {"type": "integer", "minimum": 1},
+                    "sources": {"type": "array", "items": {"type": "string"}}
+                  }, "additionalProperties": false
+                }
+              }
+            }, "additionalProperties": false
+          }
+        }
+      }
+    },
+    "measurements": {
+      "type": "object", "required": ["items", "not_applicable_reason"],
+      "properties": {
+        "not_applicable_reason": {"type": "string"},
+        "non_result_numbers": {"type": "array", "items": {
+          "type": "object", "required": ["text", "reason"],
+          "properties": {"text": {"type": "string"}, "reason": {"type": "string"}}, "additionalProperties": false
+        }},
+        "items": {"type": "array", "items": {
+          "type": "object", "required": ["id", "statement", "status", "sources"],
+          "properties": {
+            "id": {"type": "string"}, "statement": {"type": "string"},
+            "status": {"enum": ["supported", "qualified", "omitted"]},
+            "sources": {"type": "array", "items": {"type": "string"}},
+            "baseline": {"type": "string"}, "candidate": {"type": "string"}, "workload": {"type": "string"},
+            "environment": {"type": "string"}, "versions": {"type": "string"}, "window": {"type": "string"},
+            "metric": {"type": "string"}, "unit": {"type": "string"}, "method": {"type": "string"},
+            "result": {"type": "string"}, "uncertainty": {"type": "string"},
+            "provenance": {"enum": ["production", "experiment", "simulation", "estimate", "author-statement"]},
+            "causality": {"enum": ["descriptive", "causal", "unknown"]},
+            "qualification": {"type": "string"},
+            "limitations": {"type": "array", "items": {"type": "string"}},
+            "ml_context": {
+              "type": "object", "additionalProperties": {"type": "string"}
+            }
+          }, "additionalProperties": false
+        }}
+      }, "additionalProperties": false
+    },
+    "reproducibility": {
+      "type": "object", "required": ["applicable", "reason", "execution"],
+      "properties": {
+        "applicable": {"type": "boolean"}, "reason": {"type": "string"},
+        "prerequisites": {"type": "string"}, "versions": {"type": "string"}, "permissions": {"type": "string"},
+        "cost": {"type": "string"}, "verification": {"type": "string"}, "cleanup": {"type": "string"},
+        "troubleshooting": {"type": "string"},
+        "steps": {"type": "array", "items": {
+          "type": "object", "required": ["instruction", "expected"],
+          "properties": {"instruction": {"type": "string"}, "expected": {"type": "string"}}, "additionalProperties": false
+        }},
+        "execution": {
+          "type": "object", "required": ["status"],
+          "properties": {
+            "status": {"enum": ["not-run", "verified"]}, "reason": {"type": "string"},
+            "disclosure": {"type": "string"}, "evidence_file": {"type": "string"},
+            "permission_record": {"type": "string"}, "environment": {"type": "string"}
+          }, "additionalProperties": false
+        }
+      }, "additionalProperties": false
+    },
+    "figures": {
+      "type": "object", "required": ["items", "not_applicable_reason"],
+      "properties": {
+        "not_applicable_reason": {"type": "string"},
+        "items": {"type": "array", "items": {
+          "type": "object", "required": ["id", "kind", "label", "caption", "alt", "sources", "used_in"],
+          "properties": {
+            "id": {"type": "string"}, "kind": {"enum": ["architecture", "sequence", "flow", "deployment", "chart", "table", "equation", "screenshot"]},
+            "label": {"type": "string"}, "caption": {"type": "string"}, "alt": {"type": "string"},
+            "sources": {"type": "array", "items": {"type": "string"}},
+            "used_in": {"type": "array", "items": {"type": "string"}},
+            "source_file": {"type": "string"}, "rendered_file": {"type": "string"},
+            "conceptual": {"type": "boolean"}, "permission_basis": {"type": "string"},
+            "measurement_ids": {"type": "array", "items": {"type": "string"}},
+            "variables": {"type": "object", "additionalProperties": {"type": "string"}},
+            "expression": {"type": "string"},
+            "data": {
+              "type": "object", "required": ["file", "x", "y", "units", "baseline", "aggregation", "conditions"],
+              "properties": {
+                "file": {"type": "string"}, "x": {"type": "string"}, "y": {"type": "string"},
+                "units": {"type": "string"}, "baseline": {"type": "string"}, "aggregation": {"type": "string"}, "conditions": {"type": "string"}
+              }, "additionalProperties": false
+            }
+          }, "additionalProperties": false
+        }}
+      }, "additionalProperties": false
+    },
+    "reviews": {
+      "type": "array", "items": {
+        "type": "object", "required": ["file", "sha256", "evidence", "technical", "editorial"],
+        "properties": {
+          "file": {"type": "string"}, "sha256": {"type": "string"},
+          "evidence": {"type": "object"}, "technical": {"type": "object"}, "editorial": {"type": "object"}
+        }, "additionalProperties": false
+      }
+    }
+  }
+}

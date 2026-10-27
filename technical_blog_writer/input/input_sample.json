@@ -1,0 +1,33 @@
+{
+  "topic": "Customer sandbox: business need and initial architecture",
+  "audience": "External software developers, software architects, and product managers",
+  "goal": "Explain the business need, platform constraints, alternatives, initial architecture, technical challenges, and cost implications.",
+  "words": 2000,
+  "drafts": 2,
+  "depth": "Architecture-deep",
+  "publication": "public",
+  "keywords": ["customer sandbox", "preview environment", "distributed systems", "isolation", "cost"],
+  "cover": ["Business motivation", "Constraints imposed by the existing platform", "Alternative designs with diagrams and pros/cons", "Initial architecture and request/data flows", "Reliability and operations", "Cost with measurement caveats"],
+  "exclude": ["Explain neither the later virtual-lane architecture nor the later developer-sandbox architecture; teasers only", "Exclude evidence after the cutoff", "Do not repeat the series roadmap in both introduction and conclusion"],
+  "cutoff_date": "2025-12-31",
+  "series": {
+    "part": 1,
+    "total": 3,
+    "roadmap": ["Business need and initial customer-sandbox architecture", "A more cost-effective solution after demand grew", "How the architecture changed for developer sandboxes"]
+  },
+  "sources": {
+    "Confluence": ["https://example.atlassian.net/wiki/spaces/SANDBOX/overview", "https://example.atlassian.net/wiki/spaces/ENG/pages/123456/Customer-Sandbox"],
+    "Slack": ["https://example.slack.com/archives/C_SANDBOX", "https://example.slack.com/archives/C_PLATFORM"],
+    "Jira": ["https://example.atlassian.net/jira/software/projects/SBX/boards/123"],
+    "Datadog": ["https://app.datadoghq.com/dashboard/example/customer-sandbox"],
+    "GitHub": ["https://github.com/example/application", "https://github.com/example/helm-charts", "https://github.com/example/terraform"],
+    "Google Drive": ["https://drive.google.com/drive/folders/REPLACE_WITH_FOLDER_ID"],
+    "Vantage": ["https://console.vantage.sh/reports/REPLACE_WITH_REPORT_ID"]
+  },
+  "scope": "Only the supplied project sources and relevant in-scope children, linked documents, complete threads and code; ask before expanding to new spaces/channels/services.",
+  "follow": "both",
+  "max_depth": 2,
+  "store_confidential_locally": true,
+  "outputs": ["markdown", "html", "pdf", "google_doc"],
+  "notes": "Private locators were replaced with placeholders; replace them before collection. Internal evidence is not permission to publish. Validate financial figures, metrics, demand-growth claims and architecture/security details with their owners. Do not infer any previous approval or authentication status."
+}

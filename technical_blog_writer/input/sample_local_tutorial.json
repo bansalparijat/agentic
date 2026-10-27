@@ -1,0 +1,11 @@
+{
+  "topic": "Understanding database connection pooling",
+  "audience": "Developers learning backend performance",
+  "words": 900,
+  "publication": "public",
+  "cover": ["Why pools exist", "A request-flow diagram", "Pool sizing trade-offs", "Timeout and overload behavior"],
+  "files": ["input/materials/pooling-notes.md", "input/materials/load-test.csv", "input/materials/design.pdf"],
+  "scope": "Only these supplied local files; no web or connector research.",
+  "follow": "none",
+  "store_confidential_locally": false
+}

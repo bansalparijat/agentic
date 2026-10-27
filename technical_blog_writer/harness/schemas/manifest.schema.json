@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Local technical-blog harness manifest (not an external host platform standard)",
+  "type": "object",
+  "required": ["schema_version", "id", "entrypoint", "capability_contract", "hosts", "input_schema", "input_sample", "blueprints", "editorial_schema", "workflow", "policies", "defaults", "runtime", "stages", "evaluations", "git_guard"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "minLength": 1},
+    "name": {"type": "string"},
+    "host": {"type": "string"},
+    "entrypoint": {"type": "string"},
+    "capability_contract": {"type": "string"},
+    "hosts": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "required": ["id", "entrypoint", "adapter", "activation"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "entrypoint": {"type": "string", "minLength": 1},
+          "adapter": {"type": "string", "pattern": "^harness/adapters/.*\\.md$"},
+          "activation": {"enum": ["native-project-instructions", "project-rule", "repository-instructions", "explicit-prompt"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "workflow": {"type": "string"},
+    "defaults": {"type": "string"},
+    "input_schema": {"type": "string"},
+    "blueprints": {"type": "string"},
+    "editorial_schema": {"type": "string"},
+    "input_sample": {"type": "string"},
+    "input_samples": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "policies": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "runtime": {
+      "type": "object",
+      "required": ["state", "decisions", "outputs", "input", "input_snapshot", "collection_state", "editorial_packet", "quality_report", "commands", "execution", "bootstrap_command"],
+      "properties": {
+        "state": {"type": "string"}, "decisions": {"const": "outputs/decisions.md"},
+        "input": {"const": "input/blog.json"}, "input_snapshot": {"const": "outputs/input.json"},
+        "outputs": {"const": "outputs/"}, "collection_state": {"type": "string"},
+        "editorial_packet": {"const": "outputs/draft/editorial.json"}, "quality_report": {"const": "outputs/draft/quality-report.json"},
+        "commands": {"type": "array", "items": {"type": "string"}}, "execution": {"type": "string"},
+        "bootstrap_command": {"const": ["scripts/blog.py", "startup"]}
+      }
+    },
+    "stages": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": {
+        "type": "object", "required": ["id", "guide", "inputs", "outputs", "gate"],
+        "properties": {
+          "id": {"enum": ["COLLECTION", "DRAFT", "REVISE", "PREPARE"]},
+          "guide": {"type": "string"},
+          "inputs": {"type": "array", "items": {"type": "string"}},
+          "outputs": {"type": "array", "items": {"type": "string", "pattern": "^outputs/"}},
+          "gate": {"type": "string"}
+        }
+      }
+    },
+    "evaluations": {"type": "string"},
+    "git_guard": {"type": "string"}
+  }
+}

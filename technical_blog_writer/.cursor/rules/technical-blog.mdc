@@ -1,0 +1,8 @@
+---
+description: Shared technical-blog workflow with explicit approvals and bounded source collection
+alwaysApply: true
+---
+
+For requests to start, resume, or continue a technical blog, read `AGENTS.md`, `harness/adapters/cursor.md`, and `harness/contracts/host-capabilities.md` from this repository, then follow their manifest/workflow/policies and saved-state startup protocol.
+
+This rule does not authorize collection on its own or start a blog for unrelated coding edits. Use Cursor's actual tools/MCP settings; never assume another host's credentials. Preserve user approval gates, selected-source consent, collection request permits, and Git exclusion of `outputs/`. If a needed tool or permission is absent, ask and pause rather than invent success.
