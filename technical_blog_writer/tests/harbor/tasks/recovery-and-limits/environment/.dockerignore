@@ -1,0 +1,8 @@
+# Context is the staged environment/, never the repository root.
+**/__pycache__
+**/*.pyc
+**/.git
+**/.env*
+**/outputs
+**/project.json
+**/node_modules

@@ -33,8 +33,14 @@ scripts/
   host.py                         read-only local adapter/workspace check
   intake.py                       input schema validation; no approvals or MCP calls
   editorial.py                    blueprint/packet scaffolds and local quality/freshness checks
+  prepare_harbor.py / run_harbor.py public-only task staging and serial container regressions (development only)
+package.json / vitest.config.mjs   optional Vitest unit/contract test tooling
 .githooks/pre-commit               optional activated Git-index guard
-tests/                            isolated runtime/contract/safety evaluations
+tests/
+  vitest/                         small static/pure-helper unit validations
+  scenarios/                      longer isolated CLI journeys and read-only artifact verifier
+  harbor/tasks/                   full-cycle/recovery task templates, staged before execution
+  test_*.py                       retained Python runtime/contract/safety regressions
 outputs/                          ignored runtime evidence/artifacts only
 input/                            five sanitized simple-brief samples; input/blog.json is private
 project.json                      ignored project state at workspace root
@@ -52,7 +58,7 @@ All paths in the manifest and instructions are workspace-relative unless stated 
 4. Outputs, counters, queue, skips, approvals, provenance and decision logs survive interruptions. No automatic budget resets or silent scope expansion. On user exit stop the workflow, not the host application itself.
 5. Stage contracts in `manifest.json` declare inputs, artifacts and approval gates. The workflow contains detailed steps; the PREPARE guide contains format-specific steps. Cross-cutting rules belong in policies, not duplicated executable agents.
 6. Before presenting drafts/revisions, the agent uses the selected blueprint, generated `outputs/draft/editorial.json` and sequential evidence/technical/editorial passes, then runs `editorial.py check`. New projects and explicitly opted-in legacy DRAFT/REVISE runs are gated by fresh reports; user satisfaction and PREPARE title selection remain separate. Reports/CSV/checksums validate local structure and attestations, not facts, execution or visual correctness. No new mandatory input fields, agents or network services are introduced. See `harness/policies/quality.md`.
-7. Run the regression suite before changing this specification. Tests validate manifest references, bounds/pacing/backoff/deduplication and workflow safeguards. Local tests do not prove remote MCP access, prose correctness, legal clearance, source API quotas or visual export quality.
+7. Run the regression suite before changing this specification. `manifest.test_suites` declares Vitest for small validations, retained Python regressions, and local/Harbor longer integration journeys; the legacy `evaluations` command remains compatible. See [../tests/README.md](../tests/README.md). Harbor stages only allowlisted public files, uses fresh isolated workspaces, serial oracle trials, runtime network denial and a separate verifier. Export/cloud boundaries and operator approvals are explicitly synthetic. Ask before installing development tools/images. Tests validate manifest references, bounds/pacing/backoff/deduplication and workflow safeguards; they do not prove real LLM behavior, remote MCP access, prose correctness, legal clearance, source API quotas or visual/cloud export quality.
 
 ## Extension points
 

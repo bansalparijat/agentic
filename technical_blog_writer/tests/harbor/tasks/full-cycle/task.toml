@@ -1,0 +1,26 @@
+schema_version = "1.4"
+artifacts = ["/workspace/full-cycle"]
+
+[task]
+name = "technical-blog/full-cycle"
+description = "Synthetic full local workflow, quality freshness, title reselection and delivery gates."
+
+[metadata]
+category = "integration-regression"
+external_services = "test doubles only; not a prose-quality or live-host evaluation"
+
+[agent]
+timeout_sec = 300.0
+network_mode = "no-network"
+
+[verifier]
+timeout_sec = 120.0
+environment_mode = "separate"
+network_mode = "no-network"
+
+[environment]
+build_timeout_sec = 600.0
+network_mode = "no-network"
+cpus = 1
+memory_mb = 1024
+storage_mb = 2048

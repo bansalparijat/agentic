@@ -13,6 +13,13 @@
 !/input/sample_custom_sources.json
 !/input/README.md
 .venv/
+.venv-harbor/
+# Test dependencies, staged Harbor datasets/jobs and generated reports.
+/node_modules/
+/build/
+/coverage/
+/jobs/
+/npm-debug.log*
 __pycache__/
 *.pyc
 .DS_Store

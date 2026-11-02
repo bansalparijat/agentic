@@ -25,3 +25,7 @@ A request such as **“Start a technical blog using input/blog.json.”** is suf
 ## Entry point
 
 The user can say: **“Start a technical blog using input/blog.json.”** or **“Resume the blog workflow.”** A topic-only request is also valid; collect only the missing preferences. No workflow instructions need to be pasted into the user prompt. Setup and command examples are in `README.md`.
+
+## Harness development and tests (does not activate a blog)
+
+For repository changes, read `developer/README.md` and `tests/README.md`. Use Vitest for small unit/contract validations, retain Python regressions, and use Harbor for full-cycle/longer integration scenarios. Test only fresh synthetic workspaces; never initialize, adopt, resume or mutate the real blog to test code. Ask before installing test dependencies, Python runtimes, browsers or container images. Do not probe live MCPs, forward credentials, call paid models or publish outputs for these tests. Harbor's oracle and labelled export/cloud fixtures validate local contracts, not real human approval, factual prose, live-host behavior, rendered PDFs or Google Doc creation. Never reuse synthetic attestations for an actual article. Record which runners really executed and which checks are pending/failed in `developer/SESSION_CONTEXT.md`.

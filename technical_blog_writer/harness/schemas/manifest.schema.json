@@ -57,6 +57,18 @@
       }
     },
     "evaluations": {"type": "string"},
+    "test_suites": {
+      "type": "object",
+      "required": ["unit", "python", "integration_local", "integration_harbor", "guide"],
+      "additionalProperties": false,
+      "properties": {
+        "unit": {"const": "npm run test:unit"},
+        "python": {"const": "python3 -m unittest discover -s tests -v"},
+        "integration_local": {"const": "python3 tests/scenarios/run.py"},
+        "integration_harbor": {"const": "python3 scripts/run_harbor.py"},
+        "guide": {"const": "tests/README.md"}
+      }
+    },
     "git_guard": {"type": "string"}
   }
 }

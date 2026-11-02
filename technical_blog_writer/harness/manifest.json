@@ -74,5 +74,12 @@
     }
   ],
   "evaluations": "python3 -m unittest discover -s tests -v",
+  "test_suites": {
+    "unit": "npm run test:unit",
+    "python": "python3 -m unittest discover -s tests -v",
+    "integration_local": "python3 tests/scenarios/run.py",
+    "integration_harbor": "python3 scripts/run_harbor.py",
+    "guide": "tests/README.md"
+  },
   "git_guard": ".githooks/pre-commit"
 }

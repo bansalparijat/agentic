@@ -1,0 +1,2 @@
+# Test tooling only; Harbor requires Python >=3.12 (core helpers still need only 3.10+).
+harbor==0.25.0

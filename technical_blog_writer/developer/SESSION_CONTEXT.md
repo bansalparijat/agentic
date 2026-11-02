@@ -173,7 +173,7 @@ Key conclusion: research governance was already strong, but article design/techn
 
 The recommended **first implementation scope** was five items: article-type blueprints, internal story outline/coverage map, structured measurement/reproducibility checks, first-class charts/figures, and a pre-review content-quality report. Keep the four stages, simple input/few prompts, privacy/selected MCP/load gates, and titles in PREPARE. Broader evidence dependency graphs, local-only completion, metadata/series improvements and a universal MCP interceptor were not included in that first scope.
 
-### L. Latest implementation: approved first article-quality scope
+### L. Implementation: approved first article-quality scope
 
 The user approved that first scope and required code, instruction files, all README guides and developer context to stay synchronized.
 
@@ -191,6 +191,21 @@ Implemented local contracts:
 - Public brief syntax and all five sanitized samples remain unchanged. Manifest/schema, host checks, shared policies/workflow, root/input/harness/adapter READMEs and this developer handoff describe the same contract. No private real run was scaffolded, adopted or modified as part of development.
 
 Local tests use clearly marked synthetic source/packet/review fixtures. These prove validator/gate behavior, not actual editorial quality of fixture prose. Never copy them into production approvals. Final validation for this implementation: **129 tests passed**; all scripts compiled; harness JSON/manifest references, all five unchanged input samples and documentation links were verified. No live MCP calls, sample-command execution, new production run/adoption or third-party-host certification occurred. Section 5 records the broader validation history.
+
+### M. Latest request: Vitest small validations and Harbor longer/full-cycle tests
+
+The user requested Vitest for small unit-like checks and Harbor for full-cycle/longer steps. Implemented a development-only split without replacing the existing Python suite or changing the blog workflow/public input:
+
+- `package.json`/`package-lock.json`, `vitest.config.mjs`, `tests/vitest/`: pinned Vitest 5.0.5, Ajv 8.20.0 and Ajv formats 3.0.1. Small schema/manifest/path/sample contracts and a restricted JSON bridge exercise actual pure Python helper logic, not JavaScript reimplementations. No runtime Node dependency for blog users.
+- `tests/scenarios/`: deterministic full-cycle and recovery/collection-limit journeys across separate CLI processes, fresh external temporary workspaces, state-preserving expected refusals, real quality/freshness gates, title reselection invalidation and independently checked artifact hashes. Clock progression is simulated, not sleep/production API load.
+- Full-cycle export invokes the production local export path with explicitly labelled HTML/browser/PDF test doubles; its fake Google Doc pointer/readback is never fetched/created. All operator answers/review attestations are synthetic. This is local implementation regression, not LLM writing/instruction-following evaluation, factual review or real cloud/browser certification.
+- `tests/harbor/tasks/`: two Harbor-format 1.4 tasks; oracle runner, no model keys/cost, runtime network denial, declared synthetic artifacts and separate verifier sandboxes. Reward defaults to 0 and becomes 1 only after artifact verification. A missing/blank result must fail.
+- `scripts/prepare_harbor.py`: fresh dataset snapshots via an explicit public-file allowlist; no personal input/state/outputs, credentials, arbitrary extra template files or source symlinks. Never merges/overwrites an existing stage. Docker builds use only the staged environment context, not the repository root.
+- `scripts/run_harbor.py`: pins Harbor 0.25.0, checks Docker, disables host telemetry, runs serial oracle trials with one attempt/no retries, then validates completed expected trials and reward 1 rather than trusting process exit alone. Never installs dependencies. Datasets/jobs stay ignored under `build/harbor/`.
+- `requirements-test-harbor.txt` and `tests/README.md`: explicit opt-in tooling setup and boundary documentation. Vitest supports Node 22.12+ in 22.x, 24.x or 26+ plus core Python 3.10+. Harbor itself needs a separate Python 3.12+ environment and Docker/Compose. Base images pin the Python/Debian family, not an immutable digest. Ask before dependencies/runtimes/images are installed/downloaded.
+- Manifest optional `test_suites` and schema document all layers; legacy `evaluations` is unchanged. Root/harness/developer guides and shared development instructions are synchronized. Node dependencies, generated test reports/datasets/jobs and the Harbor virtualenv are ignored. No real run artifacts were initialized, adopted or modified.
+
+Validation recorded so far: **143 Python tests passed**; both local integration journeys passed (**64 CLI operations, 21 expected refusals**); script compilation, JavaScript/shell syntax checks, harness JSON/manifest checks, all five unchanged samples and documentation references passed. Both staged public-only installations ran successfully with separately copied verifiers on the host; tampered successful artifacts were correctly rejected for each scenario (not a Docker/Harbor run). The npm lockfile was resolved without installing dependencies (`--package-lock-only --ignore-scripts`), and all resolved package hosts are public npm. Official Harbor 0.25.0 source/format references were inspected, not installed/executed. **Actual Vitest and Harbor invocations remain pending approved dependency/image installation**; local scenario success and mocked job-result fixtures must not be presented as real runner certification.
 
 ## 3. Current repository map
 
@@ -224,7 +239,16 @@ scripts/
   collection.py                   frontier and source-load controller
   host.py                         read-only local adapter check
   editorial.py                    blueprint/story/proof/figure/review checks and freshness gates
-tests/                            temporary-workspace/mocked regression tests
+  prepare_harbor.py / run_harbor.py public-only staging and serial Harbor oracle regressions (development only)
+package.json / package-lock.json   pinned optional Vitest/Ajv development dependencies
+vitest.config.mjs                 small unit/contract suite only; no automatic integration runs
+requirements-test-harbor.txt      pinned optional Harbor tooling (Python 3.12+)
+tests/
+  README.md                       testing matrix, commands, approvals and synthetic boundaries
+  vitest/                         static/pure-helper small unit validations
+  scenarios/                      isolated longer CLI journeys and read-only artifact verifier
+  harbor/tasks/                   two task templates (must stage before Docker/Harbor)
+  test_*.py                       retained temporary-workspace/mocked Python regressions
 .githooks/pre-commit               optional activated Git-index guard
 developer/                        development handoff (this folder)
 project.json                      ignored per-run state at workspace root
@@ -290,7 +314,7 @@ Review revisions and notes are immutable numbered files. The agent now plans art
 
 Regression coverage grew through the session: initial workflow, outputs migration, Git/MCP gates, source selection, bounded collection, host adapters, input/title/migration, then simplified input and PREPARE-only titles.
 
-At the initial documentation handoff, **86 tests passed**, and all five input samples, harness JSON and document references were validated. The implicit-startup change (J) brought the suite to **97 passing tests**. The latest first-scope article-quality implementation (L) has **129 passing tests**, with script compilation, JSON/manifest references, all five input samples and documentation links also passing. Tests use temporary workspaces and mocked remote/browser behavior as appropriate. Run them again for any change; installed optional dependencies can affect whether export tests run or skip.
+At the initial documentation handoff, **86 tests passed**, and all five input samples, harness JSON and document references were validated. The implicit-startup change (J) brought the suite to **97 passing tests**. The latest first-scope article-quality implementation (L) has **129 passing tests**, with script compilation, JSON/manifest references, all five input samples and documentation links also passing. The latest test-layer implementation (M) has **143 passing Python tests** and both local longer scenarios passing (64 CLI operations, 21 expected refusals). Actual Vitest/Harbor execution is pending approved tooling installation, not implied by these results. Tests use temporary workspaces and mocked remote/browser behavior as appropriate. Run relevant layers again for any change; installed optional dependencies can affect whether export tests run or skip.
 
 Relevant suites:
 
@@ -301,6 +325,8 @@ Relevant suites:
 - `test_safeguards.py`: selected-source-only MCP decisions, stopped/resume behavior, Git exclusion/guard and personal-input protection.
 - `test_startup.py`: automatic read-only input/resume routing, invalid/missing input handling, no state writes, stopped-run preservation, host bootstrap parity and short-prompt/shared-policy consistency.
 - `test_editorial.py`: blueprint/scaffold, coverage/outline/budget, measurement/ML context, truthful execution status, CSV/figure/equation/screenshot checks, sequential review findings, reports/archives, stale-report gates and legacy adoption. `editorial_fixtures.py` supplies explicitly synthetic local-contract fixtures, never real review approval.
+
+- `test_test_tooling.py`: public-only staging, symlink/private-path rejection, no stage overwrites, task isolation and fail-closed verifier/job-result handling. `tests/vitest/` supplies small contracts; `tests/scenarios/` and `tests/harbor/tasks/` supply the longer layers documented above.
 
 No local test run proves every third-party host works live, MCP authentication succeeds, source API quotas are safe, technical facts/legal rights are correct, or visual exports/cloud formatting were actually inspected. Never repeat those claims without real checks.
 

@@ -27,7 +27,7 @@ The example above is **not an already-approved task**; it illustrates how to req
    - State, evidence, approvals, titles and export: `scripts/blog.py` (new/opted-in quality gates included).
    - Traversal/load protection: `harness/policies/collection.md`, `scripts/collection.py`.
    - Core-harness portability: `harness/contracts/host-capabilities.md`, `harness/adapters/`, `scripts/host.py`.
-5. Relevant tests; run the full suite before and after changes.
+5. [../tests/README.md](../tests/README.md) — test-layer commands, dependency approval, synthetic boundary limits and privacy-safe Harbor staging. Run the relevant layers and full Python regression suite before/after changes; never equate a local scenario run with a real Harbor/Vitest invocation.
 
 All paths above are repository-relative. If this folder is embedded in another project, resolve the harness installation explicitly rather than reading a different project's instruction files by accident.
 
@@ -42,9 +42,12 @@ python3 scripts/host.py --list
 python3 scripts/blog.py startup --help
 python3 scripts/editorial.py --help
 python3 scripts/blog.py inspect-input --file input/sample_single.json
+python3 tests/scenarios/run.py
 ```
 
-The last command validates a **sanitized sample only**, without starting a project or making source calls. Do not run `init` in this repository simply to test a change; tests use temporary workspaces. If export-specific tests skip because optional dependencies are absent, report the skips honestly. Ask before installing dependencies or browsers.
+For small unit/contract validations use **Vitest** (`npm run test:unit`). For full-cycle/longer regressions use **Harbor** (`python3 scripts/run_harbor.py`). Both are development-only and need separately approved installation: Vitest requires supported Node 22.12+/24.x/26+ plus Python 3.10+; Harbor 0.25.0 requires an isolated Python 3.12+ environment and Docker/Compose. See [../tests/README.md](../tests/README.md). Harbor uses a deterministic oracle, synthetic operator answers and export/cloud test doubles, serial attempts and a separate verifier; no paid model or real source credentials. `--prepare-only` stages public files without either tool.
+
+The `inspect-input` command validates a **sanitized sample only**, without starting a project or making source calls. The scenario command uses only new temporary synthetic workspaces. Do not run `init` in this repository simply to test a change; tests use temporary workspaces. If export-specific tests skip because optional dependencies are absent, report the skips honestly. Ask before installing dependencies or browsers.
 
 Local checks do not verify that third-party core harnesses loaded instructions, that MCPs are authenticated, or that a real PDF/cloud document is visually correct. For live-host validation, use the manual checklist in `harness/adapters/README.md` in a fresh authorized test workspace.
 
@@ -61,4 +64,4 @@ Local checks do not verify that third-party core harnesses loaded instructions, 
 
 ## Validation baseline
 
-The initial handoff had **86 passing tests**, and the implicit-startup update had **97**. The latest article-quality implementation has **129 passing tests**, including blueprint/coverage/proof/reproducibility/figure/review/freshness cases. Script compilation, all harness JSON/manifest references, the five unchanged input samples and documentation links were also verified; see `developer/SESSION_CONTEXT.md` for context. All five simple input samples remain unchanged. These are recorded results, not a promise about a later checkout; rerun the suite. Fixtures in `tests/editorial_fixtures.py` simulate local contracts only—never reuse their synthetic sources/pass attestations for a real article. No third-party host or live MCP integration is certified by these tests.
+The initial handoff had **86 passing tests**, the implicit-startup update had **97**, and the article-quality implementation had **129**. The latest test-layer work has **143 passing Python tests** plus both local integration journeys passing (64 CLI operations, 21 expected refusals). Vitest/Harbor files and lockfile are added; actual runner execution is pending approved dependency installation. Script/shell/JavaScript syntax, harness JSON/manifest, samples and documentation checks pass. Staged-copy smoke tests and verifier tamper rejection also pass on the host, not in Harbor. See `developer/SESSION_CONTEXT.md` for final validation context. All five simple input samples remain unchanged. These are recorded results, not a promise about a later checkout; rerun the suite. Fixtures in `tests/editorial_fixtures.py` simulate local contracts only—never reuse their synthetic sources/pass attestations for a real article. No third-party host or live MCP integration is certified by these tests.
